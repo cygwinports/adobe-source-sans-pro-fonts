@@ -1,7 +1,7 @@
 inherit font
 
 NAME="font-adobe-sourcesanspro-ttf"
-VERSION=1.038
+VERSION=1.050
 RELEASE=1
 CATEGORY="X11"
 SUMMARY="Adobe SourceSansPro monospace fonts"
