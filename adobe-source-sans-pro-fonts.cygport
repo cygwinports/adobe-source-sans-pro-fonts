@@ -1,24 +1,30 @@
 inherit font
 
-NAME="font-adobe-sourcesanspro-ttf"
+NAME="adobe-source-sans-pro-fonts"
 VERSION=1.050
-RELEASE=1
+RELEASE=2
 CATEGORY="X11"
-SUMMARY="Adobe SourceSansPro monospace fonts"
+SUMMARY="Adobe Source Sans Pro monospace fonts"
 DESCRIPTION="Source Sans is a set of OpenType fonts that have been designed to
 work well in user interface (UI) environments, as well as in text setting for
 screen and print."
 HOMEPAGE="http://sourceforge.net/projects/sourcesans.adobe/"
-SRC_URI="mirror://sourceforge/sourcesans.adobe/SourceSansPro_FontsOnly-${VERSION}.zip"
+SRC_URI="
+	mirror://sourceforge/sourcesans.adobe/SourceSansPro_FontsOnly-${VERSION}.zip
+	http://pkgs.fedoraproject.org/cgit/${NAME}.git/plain/${NAME}-fontconfig.conf
+"
 SRC_DIR="SourceSansPro_FontsOnly-${VERSION}"
+
+OBSOLETES="font-adobe-sourcesanspro-ttf"
+
+ARCH=noarch
 
 src_compile() { :; }
 
 src_install() {
 	cd ${S}
-	fontinto OTF
+	fontinto ${NAME%-fonts}
 	dofont OTF/*
-	fontinto TTF
-	dofont TTF/*
+	newfontconf ${NAME}-fontconfig.conf 63-${NAME%-fonts}.conf
 	dodoc *.html
 }
